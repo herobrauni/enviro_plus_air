@@ -15,13 +15,13 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip setuptools
 
-#RUN curl -sSL https://get.pimoroni.com/enviroplus | bash
-
 ADD requirements.txt .
-
-# RUN pip install numpy
 
 RUN pip3 install -r requirements.txt
 
-CMD [ "/home/pirate/python/all-in-one-no-pm.py" ]
+WORKDIR /usr/src/app
+COPY ./enviroplushat.py ./enviroplushat.py
+COPY ./entry.sh /usr/src/app/
+RUN chmod +x /usr/src/app/entry.sh
 
+CMD ["./entry.sh"]
