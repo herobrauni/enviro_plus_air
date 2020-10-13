@@ -2,24 +2,24 @@ version: '2'
 volumes:
     sensor-data:
 services:
-  influxdb:
-    restart: always
-    build: ./influxdb
-    volumes:
-      - 'sensor-data:/data'
-  grafana:
-    restart: always
-    build: ./grafana
-    ports:
-      - "80"
-    volumes:
-      - 'sensor-data:/data'
-    environment:
-        - 'HOME_DASHBOARD_UID=sensor'
-        - 'GF_PATHS_DATA=/data/grafana'
-        - 'GF_SERVER_HTTP_PORT=80'
-        - 'GF_SESSION_PROVIDER=memory'
-        - 'GF_AUTH_ANONYMOUS_ENABLED=true'
+  # influxdb:
+  #   restart: always
+  #   build: ./influxdb
+  #   volumes:
+  #     - 'sensor-data:/data'
+  # grafana:
+  #   restart: always
+  #   build: ./grafana
+  #   ports:
+  #     - "80"
+  #   volumes:
+  #     - 'sensor-data:/data'
+  #   environment:
+  #       - 'HOME_DASHBOARD_UID=sensor'
+  #       - 'GF_PATHS_DATA=/data/grafana'
+  #       - 'GF_SERVER_HTTP_PORT=80'
+  #       - 'GF_SESSION_PROVIDER=memory'
+  #       - 'GF_AUTH_ANONYMOUS_ENABLED=true'
   sensor:
     build: ./sensor
     privileged: true
@@ -31,11 +31,11 @@ services:
         - 'SENSOR_HUM_OFFSET=0'
         - 'SENSOR_ALTITUDE=0'
         - 'SENSOR_OFFSET_FACTOR=0'
-  telegraf:
-    build: ./telegraf
-    restart: always
-    cap_add:
-      - SYS_ADMIN
+  # telegraf:
+  #   build: ./telegraf
+  #   restart: always
+  #   cap_add:
+  #     - SYS_ADMIN
 
   # mqtt:
   #   image: arm32v6/eclipse-mosquitto
