@@ -1,0 +1,5 @@
+enviroplus
+smbus
+envirophat
+numpy
+pillow
