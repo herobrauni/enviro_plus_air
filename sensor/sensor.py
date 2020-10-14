@@ -28,7 +28,7 @@ class sensor():
             print('No suitable sensors found! Exiting.')
             sys.exit()
 
-    def get_cpu_temperature():
+    def get_cpu_temperature(self):
         with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
             temp = f.read()
             temp = int(temp) / 1000.0
@@ -47,7 +47,7 @@ class sensor():
                 measurements[0]['fields']['temperature'] = measurements[0]['fields']['temperature'] + \
                     float(os.environ['SENSOR_TEMP_OFFSET'])
 
-       if os.environ.get('SENSOR_HUM_OFFSET') != None:
+        if os.environ.get('SENSOR_HUM_OFFSET') != None:
             measurements[0]['fields']['humidity'] = measurements[0]['fields']['humidity'] + \
                 float(os.environ['SENSOR_HUM_OFFSET'])
 
