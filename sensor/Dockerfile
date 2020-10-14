@@ -20,7 +20,7 @@ ADD requirements.txt .
 RUN pip3 install -r requirements.txt
 
 WORKDIR /usr/src/app
-COPY ./enviroplushat.py ./enviroplushat.py
+COPY . .
 COPY ./entry.sh /usr/src/app/
 RUN chmod +x /usr/src/app/entry.sh
 

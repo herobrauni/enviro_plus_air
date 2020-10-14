@@ -6,4 +6,4 @@ mkdir -p /data/sensor
 
 echo "================ Starting Balena Sense ================"
 
-exec python /usr/src/app/scripts/sensor.py
+exec python /usr/src/app/sensor.py
