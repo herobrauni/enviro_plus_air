@@ -2,11 +2,11 @@ version: '2'
 volumes:
     sensor-data:
 services:
-  # influxdb:
-  #   restart: always
-  #   build: ./influxdb
-  #   volumes:
-  #     - 'sensor-data:/data'
+  influxdb:
+    restart: always
+    build: ./influxdb
+    volumes:
+      - 'sensor-data:/data'
   # grafana:
   #   restart: always
   #   build: ./grafana
