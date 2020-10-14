@@ -26,11 +26,11 @@ services:
     restart: always
     volumes:
       - 'sensor-data:/data'
-  # telegraf:
-  #   build: ./telegraf
-  #   restart: always
-  #   cap_add:
-  #     - SYS_ADMIN
+  telegraf:
+    build: ./telegraf
+    restart: always
+    cap_add:
+      - SYS_ADMIN
   python_test:
     build: ./python_test
     volumes: 
