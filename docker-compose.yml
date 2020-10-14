@@ -26,11 +26,6 @@ services:
     restart: always
     volumes:
       - 'sensor-data:/data'
-    environment: 
-        - 'SENSOR_TEMP_OFFSET=0'
-        - 'SENSOR_HUM_OFFSET=0'
-        - 'SENSOR_ALTITUDE=0'
-        - 'SENSOR_OFFSET_FACTOR=0'
   # telegraf:
   #   build: ./telegraf
   #   restart: always
