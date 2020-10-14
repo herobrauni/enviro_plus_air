@@ -19,4 +19,4 @@ ADD requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/bin/sh"]

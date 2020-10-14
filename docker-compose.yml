@@ -35,6 +35,7 @@ services:
     build: ./python_test
     volumes: 
       - 'sensor-data:/data'
+    tty: true
   # mqtt:
   #   image: arm32v6/eclipse-mosquitto
   #   ports:
