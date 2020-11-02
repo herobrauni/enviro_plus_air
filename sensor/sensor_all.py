@@ -55,7 +55,7 @@ try:
         if (data == False):
             exit(1)
 
-            [float_co2, float_T, float_rH] = data
+        [float_co2, float_T, float_rH] = data
 
         # get enviro data
 
