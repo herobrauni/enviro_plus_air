@@ -72,9 +72,9 @@ def get_data():
     enviro_data["nh3"] = enviro_gas.nh3 / 1000
 
     # Outputs
-    print(scd30_data)
-    print(enviro_data)
-    time.sleep(10)
+    # print(scd30_data)
+    # print(enviro_data)
+    # time.sleep(10)
     data["enviro"] = enviro_data
     data["scd30"] = scd30_data
     return data
