@@ -36,8 +36,9 @@ I2C_BUS = 1
 
 sensor_scd30 = scd30.SCD30(PIGPIO_HOST, I2C_SLAVE, I2C_BUS)
 # trigger continous measurement
+pressure = int(bme280.get_pressure())
 sensor_scd30.sendCommand(
-    scd30.COMMAND_CONTINUOUS_MEASUREMENT, bme280.get_pressure())
+    scd30.COMMAND_CONTINUOUS_MEASUREMENT, pressure)
 
 # enable autocalibration
 sensor_scd30.sendCommand(scd30.COMMAND_AUTOMATIC_SELF_CALIBRATION, 1)
