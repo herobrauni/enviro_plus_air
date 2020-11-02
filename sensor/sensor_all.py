@@ -43,17 +43,15 @@ sensor_scd30.waitForDataReady()
 bme280 = BME280()
 
 
-# Main Loop
-# sensor = sensor()
-
 enviro_data = {}
 scd30_data = {}
+data = {}
 
 
 def get_data():
     # get scd30 data
     data_raw_scd30 = sensor_scd30.readMeasurement()
-    if (data == False):
+    if (data_raw_scd30 == False):
         exit(1)
 
     [float_co2, float_T, float_rH] = data_raw_scd30
@@ -106,4 +104,5 @@ try:
         print('Sensor HTTP server running')
         httpd.serve_forever()
 except KeyboardInterrupt:
-    sensor.close()
+    sensor_scd30.close()
+    sys.exit(0)
