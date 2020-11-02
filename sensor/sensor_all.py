@@ -70,7 +70,7 @@ try:
         enviro_data["nh3"] = enviro_gas.nh3 / 1000
 
         # Outputs
-        print("temp: " + float_T + " co2: " + float_co2 + " hum: " + float_rH)
+        print(data)
         print(enviro_data)
         time.sleep(10)
 
