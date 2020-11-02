@@ -44,7 +44,7 @@ bme280 = BME280()
 
 
 # Main Loop
-sensor = sensor()
+# sensor = sensor()
 
 enviro_data = {}
 
@@ -59,15 +59,15 @@ try:
 
         # get enviro data
 
-        enviro_data.proximity = ltr559.get_proximity()
-        enviro_data.raw_temp = bme280.get_temperature()
-        enviro_data.pressure = bme280.get_pressure()
-        enviro_data.humidity = bme280.get_humidity()
-        enviro_data.light = ltr559.get_lux()
+        enviro_data["proximity"] = ltr559.get_proximity()
+        enviro_data.["raw_temp"] = bme280.get_temperature()
+        enviro_data.["pressure"] = bme280.get_pressure()
+        enviro_data.["humidity"] = bme280.get_humidity()
+        enviro_data.["light"] = ltr559.get_lux()
         enviro_gas = gas.read_all()
-        enviro_data.ox = enviro_gas.oxidising / 1000
-        enviro_data.red = enviro_gas.reducing / 1000
-        enviro_data.nh3 = enviro_gas.nh3 / 1000
+        enviro_data.["ox"] = enviro_gas.oxidising / 1000
+        enviro_data.["red"] = enviro_gas.reducing / 1000
+        enviro_data.["nh3"] = enviro_gas.nh3 / 1000
 
         # Outputs
         print("temp: " + float_T + " co2: " + float_co2 + " hum: " + float_rH)
