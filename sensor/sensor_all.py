@@ -25,6 +25,10 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import logging
 import json
 
+# enviro init
+# BME280 temperature/pressure/humidity sensor
+bme280 = BME280()
+
 # scd30 init
 PIGPIO_HOST = '::1'
 I2C_SLAVE = 0x61
@@ -32,15 +36,12 @@ I2C_BUS = 1
 
 sensor_scd30 = scd30.SCD30(PIGPIO_HOST, I2C_SLAVE, I2C_BUS)
 # trigger continous measurement
-sensor_scd30.sendCommand(scd30.COMMAND_CONTINUOUS_MEASUREMENT, 970)
+sensor_scd30.sendCommand(
+    scd30.COMMAND_CONTINUOUS_MEASUREMENT, bme280.get_pressure())
 
 # enable autocalibration
 sensor_scd30.sendCommand(scd30.COMMAND_AUTOMATIC_SELF_CALIBRATION, 1)
 sensor_scd30.waitForDataReady()
-
-# enviro init
-# BME280 temperature/pressure/humidity sensor
-bme280 = BME280()
 
 
 enviro_data = {}
