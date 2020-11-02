@@ -8,7 +8,7 @@ import smbus
 import os
 import json
 
-from enviroplushat import ENVIROPLUS
+from enviroplus import ENVIROPLUS
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # scd30 init
@@ -59,23 +59,23 @@ try:
     while True:
         data = sensor_scd30.readMeasurement()
 
-        # if (data == False):
-        #     exit(1)
+        if (data == False):
+            exit(1)
 
-        #     [float_co2, float_T, float_rH] = data
+            [float_co2, float_T, float_rH] = data
 
-        #     if float_co2 > 0.0:
-        #         print("gas_ppm{sensor=\"SCD30\",gas=\"CO2\"} %f" % float_co2)
+            # if float_co2 > 0.0:
+            #     print("gas_ppm{sensor=\"SCD30\",gas=\"CO2\"} %f" % float_co2)
 
-        #     print("temperature_degC{sensor=\"SCD30\"} %f" % float_T)
+            # print("temperature_degC{sensor=\"SCD30\"} %f" % float_T)
 
-        #     if float_rH > 0.0:
-        #         print("humidity_rel_percent{sensor=\"SCD30\"} %f" % float_rH)
+            # if float_rH > 0.0:
+            #     print("humidity_rel_percent{sensor=\"SCD30\"} %f" % float_rH)
 
         measurements = sensor.sample()
         print(measurements)
-        print(data)
-        time.sleep(10)
+        print("co2: " + float_co2 + " temp: " + float_T + " hum: " + float_rH)
+        time.sleep(3)
 
 
 except KeyboardInterrupt:
