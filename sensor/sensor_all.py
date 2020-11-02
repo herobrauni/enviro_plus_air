@@ -49,34 +49,61 @@ bme280 = BME280()
 enviro_data = {}
 scd30_data = {}
 
-try:
-    while True:
-        # get scd30 data
-        data = sensor_scd30.readMeasurement()
-        if (data == False):
-            exit(1)
 
-        [float_co2, float_T, float_rH] = data
-        scd30_data["co2"] = float_co2
-        scd30_data["Temp"] = float_T
-        scd30_data["Hum"] = float_rH
+def get_data():
+    # get scd30 data
+    data_raw_scd30 = sensor_scd30.readMeasurement()
+    if (data == False):
+        exit(1)
 
-        # get enviro data
+    [float_co2, float_T, float_rH] = data_raw_scd30
+    scd30_data["co2"] = float_co2
+    scd30_data["Temp"] = float_T
+    scd30_data["Hum"] = float_rH
 
-        enviro_data["proximity"] = ltr559.get_proximity()
-        enviro_data["raw_temp"] = bme280.get_temperature()
-        enviro_data["pressure"] = bme280.get_pressure()
-        enviro_data["humidity"] = bme280.get_humidity()
-        enviro_data["light"] = ltr559.get_lux()
-        enviro_gas = gas.read_all()
-        enviro_data["ox"] = enviro_gas.oxidising / 1000
-        enviro_data["red"] = enviro_gas.reducing / 1000
-        enviro_data["nh3"] = enviro_gas.nh3 / 1000
+    # get enviro data
 
-        # Outputs
-        print(scd30_data)
-        print(enviro_data)
-        time.sleep(10)
+    enviro_data["proximity"] = ltr559.get_proximity()
+    enviro_data["raw_temp"] = bme280.get_temperature()
+    enviro_data["pressure"] = bme280.get_pressure()
+    enviro_data["humidity"] = bme280.get_humidity()
+    enviro_data["light"] = ltr559.get_lux()
+    enviro_gas = gas.read_all()
+    enviro_data["ox"] = enviro_gas.oxidising / 1000
+    enviro_data["red"] = enviro_gas.reducing / 1000
+    enviro_data["nh3"] = enviro_gas.nh3 / 1000
+
+    # Outputs
+    print(scd30_data)
+    print(enviro_data)
+    time.sleep(10)
+    data["enviro"] = enviro_data
+    data["scd30"] = scd30_data
+    return data
+
+# init http
+
+
+class sensorHTTP(BaseHTTPRequestHandler):
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
+    def do_GET(self):
+        self._set_headers()
+        measurements = get_data()
+        self.wfile.write(json.dumps(measurements[0]['fields']).encode('UTF-8'))
+
+    def do_HEAD(self):
+        self._set_headers()
+
+
+while True:
+    server_address = ('', 80)
+    httpd = HTTPServer(server_address, sensorHTTP)
+    print('Sensor HTTP server running')
+    httpd.serve_forever()
 
 
 except KeyboardInterrupt:
