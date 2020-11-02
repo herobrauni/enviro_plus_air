@@ -99,12 +99,11 @@ class sensorHTTP(BaseHTTPRequestHandler):
         self._set_headers()
 
 
-while True:
-    server_address = ('', 80)
-    httpd = HTTPServer(server_address, sensorHTTP)
-    print('Sensor HTTP server running')
-    httpd.serve_forever()
-
-
+try:
+    while True:
+        server_address = ('', 80)
+        httpd = HTTPServer(server_address, sensorHTTP)
+        print('Sensor HTTP server running')
+        httpd.serve_forever()
 except KeyboardInterrupt:
-    sys.exit(0)
+    sensor.close()
