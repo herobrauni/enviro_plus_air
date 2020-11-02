@@ -47,6 +47,7 @@ bme280 = BME280()
 # sensor = sensor()
 
 enviro_data = {}
+scd30 = {}
 
 try:
     while True:
@@ -56,6 +57,9 @@ try:
             exit(1)
 
         [float_co2, float_T, float_rH] = data
+        scd30["co2"] = float_co2
+        scd30["Temp"] = float_T
+        scd30["Hum"] = float_rH
 
         # get enviro data
 
