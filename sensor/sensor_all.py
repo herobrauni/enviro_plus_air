@@ -52,6 +52,8 @@ class sensor():
 
 
 # Main Loop
+sensor = sensor()
+
 
 try:
     while True:
