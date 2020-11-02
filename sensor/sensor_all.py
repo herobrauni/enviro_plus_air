@@ -47,7 +47,7 @@ bme280 = BME280()
 # sensor = sensor()
 
 enviro_data = {}
-scd30 = {}
+scd30_data = {}
 
 try:
     while True:
@@ -57,9 +57,9 @@ try:
             exit(1)
 
         [float_co2, float_T, float_rH] = data
-        scd30["co2"] = float_co2
-        scd30["Temp"] = float_T
-        scd30["Hum"] = float_rH
+        scd30_data["co2"] = float_co2
+        scd30_data["Temp"] = float_T
+        scd30_data["Hum"] = float_rH
 
         # get enviro data
 
@@ -74,7 +74,7 @@ try:
         enviro_data["nh3"] = enviro_gas.nh3 / 1000
 
         # Outputs
-        print(data)
+        print(scd30_data)
         print(enviro_data)
         time.sleep(10)
 
